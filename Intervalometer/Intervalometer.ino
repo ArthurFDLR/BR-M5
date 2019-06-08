@@ -1,14 +1,36 @@
 #include "BLEDevice.h"
 //#include "BLEScan.h"
 
-// Relate to Button
-int pinButton = 17;
-int stateLED = LOW;
-int stateButton;
-int previous = LOW;
-long timeButton = 0;
-long debounce = 300;
+class Button {
+  public :
+    
+    void set_Pin(int pin)
+    {
+      _pinButton = pin;
+    }
 
+    bool Detect_click()
+    {
+      bool result = false;
+      _stateButton = digitalRead(_pinButton);  // Quand on appuis sur le boutton ...
+      if(_stateButton == HIGH && _previous == LOW && millis() - _timeButton > _debounce) {
+        _timeButton = millis();
+        result = true;
+      }
+      _previous == _stateButton;
+      return result;
+    }
+  private :
+    int _pinButton;
+    int _stateLED = LOW;
+    int _stateButton;
+    int _previous = LOW;
+    long _timeButton = 0;
+    long _debounce = 300;
+};//Button
+
+Button Button_Trigger;
+  
 // This Device Name
 String DEVICE_NAME = "ESP32";
 byte BUTTON_RELEASE = 0b10000000;
@@ -56,8 +78,8 @@ class advdCallback: public BLEAdvertisedDeviceCallbacks {
 };
 
 void setup() {
-  pinMode(pinButton, INPUT);
-    
+  Button_Trigger.set_Pin(17);
+  
   Serial.begin(115200);
   Serial.println("Starting Arduino BLE Client application...");
   BLEDevice::init("");
@@ -92,12 +114,10 @@ void loop() {
   // If we are connected to a peer BLE Server, update the characteristic each time we are reached
   // with the current time since boot.
   if (connected) {
-    stateButton = digitalRead(pinButton);  // Quand on appuis sur le boutton ...
-    if(stateButton == HIGH && previous == LOW && millis() - timeButton > debounce) {
-      timeButton = millis();
-      ButtonPushed(); // ... on appelle cette fonction
+    if (Button_Trigger.Detect_click())
+    {
+      ButtonPushed();
     }
-    previous == stateButton;
   }
   
   delay(100); // Delay a second between loops.
