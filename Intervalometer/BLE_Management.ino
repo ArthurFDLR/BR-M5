@@ -126,7 +126,7 @@ bool connectToServer(BLEAddress pAddress) {
 
 
 // Purpose : Send trigger message.
-void ButtonPushed(){
+void Trigger(){
   Serial.println(" - Shutter triggered");
   byte cmdByte[] = {MODE_IMMEDIATE|BUTTON_RELEASE}; // Binary OR : Concatenate Mode and Button
   pRemoteCharacteristic_Trigger->writeValue(cmdByte, sizeof(cmdByte), false);   // Set the characteristic's value to be the array of bytes that is actually a string.

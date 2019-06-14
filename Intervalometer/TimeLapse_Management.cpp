@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "TimeLapse_Management.h"
 
 Button::Button(int pin)
 {
@@ -16,4 +16,20 @@ bool Button::Detect_click()
   }
   _previous == _stateButton;
   return result;
+}
+
+
+TimeLapse::TimeLapse(int inter,void(*trigger)())
+{
+  TimeLapse_ON = false;
+  _Interval = inter;
+  _func_trigger = trigger;
+}
+
+void TimeLapse::TimeLapse_Trigger()
+{
+  if (TimeLapse_ON and (millis() - _time_last_trigger) > _Interval){
+    _func_trigger();
+    _time_last_trigger = millis();
+  }
 }
