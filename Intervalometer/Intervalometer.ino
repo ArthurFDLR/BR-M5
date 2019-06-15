@@ -6,7 +6,7 @@
 
 // Relate to Button
 int pinButton = 17;
-Button Button_Trigger(pinButton);
+//Button Button_Trigger(pinButton);
 
 
 // Remote name
@@ -18,8 +18,13 @@ static boolean connected = false; //True if ready to communicate; False either
 void Trigger();
 TimeLapse TL(1.0,Trigger);
 
+void IRAM_ATTR isr() {
+  TL.TimeLapse_ON = not TL.TimeLapse_ON;
+}
+
 void setup() {
-  pinMode(pinButton, INPUT);
+  pinMode(pinButton, INPUT_PULLUP);
+  attachInterrupt(pinButton, isr, FALLING);
   
   Serial.begin(115200);
   BLE_Scan();
@@ -32,13 +37,6 @@ void setup() {
 void loop() {
 
   EstablishConnection();
-
-
-  if (Button_Trigger.Detect_click())
-  {
-    TL.TimeLapse_ON = not TL.TimeLapse_ON;
-    Serial.println(TL.TimeLapse_ON);
-  }
 
   TL.TimeLapse_Trigger();
   
