@@ -19,17 +19,29 @@ bool Button::Detect_click()
 }
 
 
-TimeLapse::TimeLapse(int inter,void(*trigger)())
+TimeLapse::TimeLapse(long inter_min,void(*trigger)())
 {
   TimeLapse_ON = false;
-  _Interval = inter;
+  _MIN_Interval = inter_min;
   _func_trigger = trigger;
 }
 
 void TimeLapse::TimeLapse_Trigger()
 {
-  if (TimeLapse_ON and (millis() - _time_last_trigger) > _Interval){
-    _func_trigger();
+  if (TimeLapse_ON and ((millis() - _time_last_trigger) > Interval)){
     _time_last_trigger = millis();
+    _func_trigger();
+  }
+}
+
+void TimeLapse::TimeLapse_incDelay()
+{
+  Interval += _delay_increment;
+}
+
+void TimeLapse::TimeLapse_decDelay()
+{
+  if (Interval - _delay_increment >= _MIN_Interval){
+    Interval -= _delay_increment;
   }
 }

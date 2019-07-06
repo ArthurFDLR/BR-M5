@@ -21,14 +21,25 @@ class Button {
 
 class TimeLapse {
   public :
-    TimeLapse(int inter,void(*trigger)());
-    bool TimeLapse_ON;
+    //constructor
+    //IN/ inter_min : lower delay between shots (in ms): requiered time to reconnect to the cam
+    //IN/ trigger : function taking shot
+    TimeLapse(long inter_min,void(*trigger)());
+    //trigger each #Interval ms
     void TimeLapse_Trigger();
+    //increase #Interval
+    void TimeLapse_incDelay();
+    //decrease #Interval (> #_MIN_Interval)
+    void TimeLapse_decDelay();
+    
+    bool TimeLapse_ON;
+    long Interval = 4000; //ms
 
   private :
     void(*_func_trigger)();
-    long _Interval;
-    long _time_last_trigger = 0;
+    long _time_last_trigger = 0; //ms
+    long _MIN_Interval; //ms
+    const long _delay_increment = 100; //ms
 };
 
 #endif
