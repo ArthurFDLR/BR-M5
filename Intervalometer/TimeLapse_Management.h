@@ -33,8 +33,10 @@ class TimeLapse {
     void TimeLapse_decDelay();
     
     bool TimeLapse_ON;
+    bool SingleShot_ON;
     long Interval = 4000; //ms
-
+    unsigned int Pic_count = 0;
+    
   private :
     void(*_func_trigger)();
     long _time_last_trigger = 0; //ms

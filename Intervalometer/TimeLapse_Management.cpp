@@ -22,6 +22,7 @@ bool Button::Detect_click()
 TimeLapse::TimeLapse(long inter_min,void(*trigger)())
 {
   TimeLapse_ON = false;
+  SingleShot_ON = false;
   _MIN_Interval = inter_min;
   _func_trigger = trigger;
 }
@@ -29,6 +30,7 @@ TimeLapse::TimeLapse(long inter_min,void(*trigger)())
 void TimeLapse::TimeLapse_Trigger()
 {
   if (TimeLapse_ON and ((millis() - _time_last_trigger) > Interval)){
+    Pic_count += 1;
     _time_last_trigger = millis();
     _func_trigger();
   }

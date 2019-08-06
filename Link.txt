@@ -1,0 +1,4 @@
+https://iandouglasscott.com/2017/09/04/reverse-engineering-the-canon-t7i-s-bluetooth-work-in-progress/
+https://popupmlv.hatenablog.com/entry/2019/02/15/123000
+https://github.com/ids1024/cannon-bluetooth-remote
+https://github.com/iebyt/cbremote

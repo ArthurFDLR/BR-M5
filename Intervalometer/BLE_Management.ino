@@ -56,6 +56,12 @@ void BLE_Scan(){
   pBLEScan->setAdvertisedDeviceCallbacks(new advdCallback()); // Retrieve a Scanner and set the callback we want to use to be informed when we have detected a new device.
   pBLEScan->setActiveScan(true);
   pBLEScan->start(30); // Specify that we want active scanning and start the scan to run for 30 seconds.
+  if (doConnect){
+    Serial.println(" - Scan completed");
+  } else {
+    Serial.println(" - Scan failed, retry ...");
+    BLE_Scan();
+  }
 }
 
 
@@ -130,10 +136,13 @@ void Trigger(){
   Serial.println(" - Shutter triggered");
   byte cmdByte[] = {MODE_IMMEDIATE|BUTTON_RELEASE}; // Binary OR : Concatenate Mode and Button
   pRemoteCharacteristic_Trigger->writeValue(cmdByte, sizeof(cmdByte), false);   // Set the characteristic's value to be the array of bytes that is actually a string.
-  
+  delay(600);
+  //byte cmdrstByte[] = {BUTTON_RELEASE};
+  pRemoteCharacteristic_Trigger->writeValue(0b00001100, sizeof(cmdByte));
+/*
   // Necessary disconnection to stop triggering ... nasty solution to an unsolved protocole reverse engineering
   connected = false;
-  delay(100);
+  delay(10);
   Serial.println(" - Disctonnected");
   pClient->disconnect();
   // Reconnection
@@ -141,4 +150,5 @@ void Trigger(){
     Serial.println("We are now reconnected to the BLE Server.");
     connected = true;
   }
+*/
 }
