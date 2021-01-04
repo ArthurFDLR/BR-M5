@@ -1,14 +1,16 @@
+⚠️ This branch is available for those who want to build a remote themself. However, the source code is now obsolete compared to the main branch. ⚠️
+
 # Bluetooth camera remote
 
-The Canon M50 is a great Mirrorless camera. However it miss one thing, a descent timelapse mode, one that can do long exposure. The shutter speed option in M50's timelapse mode is indeed limited to 1/30s.
+The Canon M50 is an excellent Mirrorless camera. However, it misses a descent timelapse mode, one that can do a long exposure. The shutter speed option in M50's timelapse mode is indeed limited to 1/30s.
 
-Furthermore, the M50 don't have any shutter release port to plug classic intervalometer nor does it supports IR remote. The only options are BLE connection or using a tethering tool.
-Since the only Bluetooth remote available - BR-E1(A) - lacks intervalometer mode, here I am, building my own.
+Furthermore, the M50 doesn't have any shutter release port to plug the classic intervalometers, nor does it supports IR remote. The only options are BLE, WiFi, or tethering tools.
+Since the only Bluetooth remote available - BR-E1 - lacks intervalometer mode, let's build our own.
 
 __Functionalities:__
-* Time-lapse: shutter trigerred at a constant rate, set by the user. The numbre of photos taken during the current time-lapse is shown on the screen as well as the video length equivalent at 24fps.
+* Time-lapse: shutter triggered at a constant rate, set by the user. The number of photos taken during the current time-lapse and the equivalent video length (24fps) are shown on the screen.
 * Single shot: well, that is quite explicit.
-* Ext. trigger: use to take a photo triggered by an external signal connected to the PCB. Can be use for synchronous time-lapse (eg. 3D print time-lapse).
+* Ext. Trigger: use to take a photo triggered by an external signal connected to the PCB. Can be used for synchronous time-lapse (e.g. 3D print time-lapse).
 
 
 ## Video: In-use
@@ -28,14 +30,12 @@ All the components used are available from most electronic resellers :
 
 ## Software
 
-[Ian Douglas Scott's work on Canon BLE](https://iandouglasscott.com/2018/07/04/canon-dslr-bluetooth-remote-protocol/) saves me from the hassle of reverse engineering this protocol. However, the M50's BLE protocol seems to differs from the T7i. Once the trigger command is send, the camera stay on triggering mode. I solved this by sending a reset command shortly after triggering. To avoid this kludge, further research on Canon BLE protocol should be done.
+[Ian Douglas Scott's work on Canon BLE](https://iandouglasscott.com/2018/07/04/canon-dslr-bluetooth-remote-protocol/) saves me from the hassle of reverse engineering this protocol. However, the M50's BLE protocol seems to differ from the T7i. Once the trigger command is sent, the camera stays on triggering mode. I solved this by sending a reset command shortly after the trigger command. One should do further research on the Canon BLE protocol to avoid this kludge.
 
 Libraries used : 
 * [BLEDevice](https://github.com/nkolban/ESP32_BLE_Arduino)
 * [LCD management](https://github.com/olikraus/u8g2)
 
 ## Case
-
-I wanted a sturdy remote to carry it during my trips. After modeling a case around the PCB that I allready soldered, I 3D printed it. If you want to build your own, you'll certainly need to adjust the placement of the button on the front pannel.
 
 ![img_remote](/img/Remote_open.png)
