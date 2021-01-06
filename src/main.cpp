@@ -19,7 +19,7 @@ void setup()
     M5.Lcd.setRotation(1);
     M5_display.set_init_screen();
 
-    /*
+    
     while (! canon_ble.is_ready_to_connect())
     {
         canon_ble.scan(5);
@@ -30,12 +30,9 @@ void setup()
     if (canon_ble.connect_to_device())
     {
         M5_display.set_address(canon_ble.get_device_address().toString().c_str());
-        M5_display.set_main_menu_screen();
+        M5_display.set_main_menu_screen(timelapse.get_interval(), "Ready for single shot");
         Serial.println("Connected successfully");
     }
-    */
-    M5_display.set_address("00:9d:6b:4c:01:bd");
-    M5_display.set_main_menu_screen(timelapse.get_interval(), "Ready for single shot");
 }
 
 void update_shooting()
@@ -43,7 +40,7 @@ void update_shooting()
     // Update timelapse
     if (timelapse.TimeLapse_Trigger())
     {
-        //canon_ble.trigger();
+        canon_ble.trigger();
         Serial.println("Trigger tl");
     }
 
@@ -52,7 +49,7 @@ void update_shooting()
     {
         if (M5.BtnA.wasReleased() && !M5.BtnB.wasReleased())
         {
-            //canon_ble.trigger();
+            canon_ble.trigger();
             Serial.println("Single shot");
         }
     }
