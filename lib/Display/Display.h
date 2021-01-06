@@ -6,7 +6,6 @@
 
 extern const unsigned char icon_ble[4608];
 
-
 class Display
 {
 private:
@@ -16,13 +15,14 @@ private:
     bool negatif = true; //White text on black bg if true
 
     const GFXfont* font_name = &Yellowtail_32;
-    const GFXfont* font_titles = &FreeSerif18pt7b;
+    const GFXfont* font_titles = &FreeSerif24pt7b;
     const GFXfont* font_text = &FreeSerif12pt7b;
+    const GFXfont* font_text_small = &FreeSerif9pt7b;
 public :
     Display(M5Display* tft, String name_remote);
     void set_address(String ext_address);
     void set_init_screen();
-    void set_main_menu_screen();
+    void set_main_menu_screen(int delay, String status);
 };
 
 #endif

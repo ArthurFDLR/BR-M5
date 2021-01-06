@@ -1,6 +1,7 @@
 #include "Display.h"
 #include <Arduino.h>
 #include "M5StickCPlus.h"
+#include "icon.c"
 
 Display::Display(M5Display* tft, String name_remote):
     buffer(tft),
@@ -26,8 +27,6 @@ void Display::set_init_screen()
     //display_buffer.setTextSize(2);
     //display_buffer.setCursor(10, 70);
     //display_buffer.printf("Waiting for connection");
-    //buffer.pushImage(180, 16, 48, 48,  (uint16_t *)icon_ble);
-    
     buffer.pushSprite(0,0);
 }
 
@@ -37,13 +36,19 @@ void Display::set_address(String address_str)
     address.toUpperCase();
 }
 
-void Display::set_main_menu_screen()
+void Display::set_main_menu_screen(int delay, String status)
 {
     buffer.fillRect(0, 0, 240, 135, (negatif?TFT_BLACK:TFT_WHITE));
 
     buffer.setFreeFont(font_text);
     buffer.setTextSize(1);
-    buffer.drawString(address, 10, 10);
+    buffer.drawString(address, 120 - (buffer.textWidth(address)/2.0), 5);
+    buffer.drawLine(0, 28, 240, 28, (negatif?TFT_WHITE:TFT_BLACK));
+    buffer.drawString(status, 5, 115);
+
+    buffer.drawString("Interval (secs):", 30, 40);
+    buffer.setFreeFont(font_titles);
+    buffer.drawFloat(float(delay)/1000.0, 1, 30, 70);
 
     buffer.pushSprite(0,0);
 }
