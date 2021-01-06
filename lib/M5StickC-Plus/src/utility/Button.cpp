@@ -43,6 +43,7 @@ Button::Button(uint8_t pin, uint8_t invert, uint32_t dbTime) {
   _lastTime = _time;
   _lastChange = _time;
   _pressTime = _time;
+  _exitPressFor = false;
 }
 
 /*----------------------------------------------------------------------*
@@ -70,7 +71,10 @@ uint8_t Button::read(void) {
     if (_state != _lastState) {
       _lastChange = ms;
       _changed = 1;
-      if (_state) { _pressTime = _time; }
+      if (_state) {
+        _pressTime = _time;
+        _exitPressFor = false;
+      }
     }
     else {
       _changed = 0;
@@ -103,7 +107,13 @@ uint8_t Button::wasPressed(void) {
 }
 
 uint8_t Button::wasReleased(void) {
-  return !_state && _changed && millis() - _pressTime < _hold_time;
+  bool status = !_state && _changed && millis() - _pressTime < _hold_time;
+  if (_exitPressFor && status)
+  {
+    _exitPressFor = false;
+    return false;
+  }
+  return status;
 }
 
 uint8_t Button::wasReleasefor(uint32_t ms) {
@@ -117,7 +127,17 @@ uint8_t Button::wasReleasefor(uint32_t ms) {
  * These functions do not cause the button to be read.                  *
  *----------------------------------------------------------------------*/
 uint8_t Button::pressedFor(uint32_t ms) {
-  return (_state == 1 && _time - _lastChange >= ms) ? 1 : 0;
+  if (_exitPressFor)
+  {
+    return false;
+  }
+  
+  bool status = ((_state == 1 && _time - _lastChange >= ms) ? 1 : 0);
+  if (status)
+  {
+    _exitPressFor = true;
+  }
+  return status;
 }
 
 uint8_t Button::releasedFor(uint32_t ms) {

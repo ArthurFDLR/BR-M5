@@ -42,5 +42,6 @@ class Button {
     uint32_t _dbTime;       //debounce time
     uint32_t _pressTime;    //press time
     uint32_t _hold_time;    //hold time call wasreleasefor
+    bool _exitPressFor;     //state if we just record long press. Allow to skip associated release
 };
 #endif
