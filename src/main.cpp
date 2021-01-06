@@ -59,7 +59,7 @@ void update_shooting()
     else // Timelapses
     {
         // Stop or start timelapse
-        if (M5.BtnA.wasReleased() && !M5.BtnB.wasReleased())
+        if (M5.BtnA.wasReleased())
         {
             if (timelapse.Recording_OnOFF())
             {
@@ -77,12 +77,12 @@ void update_shooting()
 
 void update_settings()
 {
-    if (M5.BtnA.wasReleased() && !M5.BtnB.wasReleased())
+    if (M5.BtnA.wasReleased())
     {
         timelapse.TimeLapse_decDelay();
         M5_display.set_main_menu_screen(timelapse.get_interval(), "Setting interval");
     }
-    if (!M5.BtnA.wasReleased() && M5.BtnB.wasReleased())
+    if (M5.BtnB.wasReleased())
     {
         timelapse.TimeLapse_incDelay();
         M5_display.set_main_menu_screen(timelapse.get_interval(), "Setting interval");

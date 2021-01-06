@@ -44,11 +44,12 @@ void Display::set_main_menu_screen(int delay, String status)
     buffer.setTextSize(1);
     buffer.drawString(address, 120 - (buffer.textWidth(address)/2.0), 5);
     buffer.drawLine(0, 28, 240, 28, (negatif?TFT_WHITE:TFT_BLACK));
-    buffer.drawString(status, 5, 115);
+    buffer.drawString(status, 120 - (buffer.textWidth(status)/2.0), 112);
+    buffer.drawLine(0, 107, 240, 107, (negatif?TFT_WHITE:TFT_BLACK));
 
-    buffer.drawString("Interval (secs):", 30, 40);
+    buffer.drawString("Interval (secs):", 30, 35);
     buffer.setFreeFont(font_titles);
-    buffer.drawFloat(float(delay)/1000.0, 1, 30, 70);
+    buffer.drawFloat(float(delay)/1000.0, 1, 30, 60);
 
     buffer.pushSprite(0,0);
 }

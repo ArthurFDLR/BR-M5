@@ -24,7 +24,10 @@ void TimeLapse::TimeLapse_incDelay()
     {
         Interval = _MIN_Interval;
     }
-    Interval += _delay_increment;
+    else
+    {
+        Interval += _delay_increment;
+    }
 }
 
 void TimeLapse::TimeLapse_decDelay()
