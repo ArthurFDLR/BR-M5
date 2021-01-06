@@ -27,6 +27,7 @@ class Button {
     uint8_t releasedFor(uint32_t ms);
     uint8_t wasReleasefor(uint32_t ms);
     uint32_t lastChange();
+    void reset();
 
   private:
     uint8_t _pin;           //arduino pin number

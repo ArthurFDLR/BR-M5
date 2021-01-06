@@ -130,3 +130,7 @@ uint8_t Button::releasedFor(uint32_t ms) {
 uint32_t Button::lastChange(void) {
   return _lastChange;
 }
+
+void Button::reset(void) {
+  _lastChange = millis();
+}
