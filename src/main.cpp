@@ -123,7 +123,5 @@ void loop()
     default:
         break;
     }
-
-    // Delay setting
     delay(10);
 }
