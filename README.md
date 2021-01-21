@@ -1,6 +1,6 @@
 # BR-M5: A custom Bluetooth Remote for Canon DSLRs
 
-The bluetooth remote BR-M5 aims at replicating Canon's BR-E1 behavior with an addiitonal timelapse mode. Fortunately, *M5Stack* propose a nice little inexpensive development board that perfectly fits our needs, the [M5Stick-Cplus](https://m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit?variant=35275856609444).
+This Bluetooth remote aims to replicate Canon's BR-E1 behavior while adding key features like fully programable time-lapses that most Canon cameras lack! Fortunately, *M5Stack* propose a nice little inexpensive development board that perfectly fits our needs, the [M5Stick-Cplus](https://m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit?variant=35275856609444).
 
 The BR-M5 has been primarily developped for the Canon M50 MkI which misses a descent timelapse mode that can do long exposures. The shutter speed option in M50's timelapse mode is indeed limited to 1/30s. Furthermore, the M50 doesn't have any shutter release port to plug classic intervalometers. No official Bluetooth, WiFi, or tethering tools currently offer timelapse capabilities.
 
