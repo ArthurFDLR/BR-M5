@@ -1,3 +1,5 @@
+[![BR-M5 | Open-Source Bluetooth Remote for Canon DSLRs](./.github/cover.png)](https://youtu.be/Gh5uEc2dNJM "BR-M5 | Open-Source Bluetooth Remote for Canon DSLRs")
+
 # BR-M5: An open-source Bluetooth Remote for Canon DSLRs
 
 This Bluetooth remote aims to replicate Canon's BR-E1 behavior while adding key features like fully programable time-lapses that most Canon cameras lack! Fortunately, *M5Stack* proposes a nice little inexpensive development board that perfectly fits our needs, the [M5Stick-Cplus](https://m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit?variant=35275856609444).
