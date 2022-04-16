@@ -1,0 +1,36 @@
+
+{
+    "name": "Canon BLE Remote",
+    "keywords": "Canon, ESP32, BLE",
+    "description": "Emulates Canon BR-E1 remote with ESP32",
+    "homepage": "https://github.com/maxmacstn/ESP32-Canon-BLE-Remote",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/maxmacstn/ESP32-Canon-BLE-Remote"
+    },
+    "version": "1.0.2",
+    "authors": [
+      {
+      "name": "MaxMacSTN",
+      "email": "maxmaczaa@gmail.com",
+      "url": "https://magiapp.me",
+      "maintainer": true 
+      },
+      {
+        "name": "Arthur Findelair",
+        "email": "arthfind@gmail.com",
+        "url": "https://arthurfindelair.com/",
+        "maintainer": true 
+      }
+    ],
+    "frameworks": "arduino",
+    "platforms": "esp32",
+    "dependencies":
+    [
+        {
+            "owner": "rpolitex",
+            "name": "ArduinoNvs",
+            "version": "^2.5"
+        }
+      ]
+}

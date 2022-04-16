@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map For CANONBLEREM
+#######################################
+#######################################
+# Library (KEYWORD3)
+#######################################
+
+ESP32-Canon-BLE-Remote	KEYWORD3
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+CanonBLERemote	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init	KEYWORD2
+pair	KEYWORD2
+isConnected	KEYWORD2
+
+trigger	KEYWORD2
+focus	KEYWORD2
+
+getPairedAddress	KEYWORD2
+getPairedAddressString	KEYWORD2

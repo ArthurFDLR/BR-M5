@@ -21,7 +21,7 @@ private:
 public :
     Display(M5Display* tft, String name_remote);
     void set_address(String ext_address);
-    void set_init_screen();
+    void set_init_screen(bool do_pair);
     void set_main_menu_screen(int delay, String status);
 };
 

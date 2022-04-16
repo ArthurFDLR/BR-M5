@@ -12,7 +12,7 @@ Display::Display(M5Display* tft, String name_remote):
     buffer.setCursor(0, 0);
 }
 
-void Display::set_init_screen()
+void Display::set_init_screen(bool do_pair)
 {
     buffer.fillRect(0, 0, 240, 135, (negatif?TFT_BLACK:TFT_WHITE));
     
@@ -20,13 +20,12 @@ void Display::set_init_screen()
     buffer.setFreeFont(font_name);
     buffer.drawString(name, 120 - (buffer.textWidth(name)/2.0), 20 +  font_name->glyph->height); 
     
-    buffer.setTextSize(1);
-    buffer.setFreeFont(font_text);
-    buffer.drawString("Pairing in progress", 120 - (buffer.textWidth("Pairing in progress")/2.0), 95); 
+    if(do_pair){
+        buffer.setTextSize(1);
+        buffer.setFreeFont(font_text);
+        buffer.drawString("Pairing in progress", 120 - (buffer.textWidth("Pairing in progress")/2.0), 95); 
+    }
 
-    //display_buffer.setTextSize(2);
-    //display_buffer.setCursor(10, 70);
-    //display_buffer.printf("Waiting for connection");
     buffer.pushSprite(0,0);
 }
 
