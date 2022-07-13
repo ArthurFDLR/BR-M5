@@ -43,10 +43,13 @@ void Display::set_main_menu_screen(int delay, String status)
     buffer.setTextSize(1);
     buffer.drawString(address, 120 - (buffer.textWidth(address)/2.0), 5);
     buffer.drawLine(0, 28, 240, 28, (negatif?TFT_WHITE:TFT_BLACK));
+    buffer.drawString("Interval (s):", 30, 35);
     buffer.drawString(status, 120 - (buffer.textWidth(status)/2.0), 112);
     buffer.drawLine(0, 107, 240, 107, (negatif?TFT_WHITE:TFT_BLACK));
 
-    buffer.drawString("Interval (secs):", 30, 35);
+    buffer.setFreeFont(font_text_small);
+    buffer.drawString("Batt%:",190,73);
+    buffer.drawFloat(((M5.Axp.GetBatVoltage()-3.27)/(4.2-3.27))*100,1,200,88); // Battery: 120 mAh @ 3.7V (444 mWh), 3.27-4.2V accepted range
     buffer.setFreeFont(font_titles);
     buffer.drawFloat(float(delay)/1000.0, 1, 30, 60);
 

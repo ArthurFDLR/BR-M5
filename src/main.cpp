@@ -12,6 +12,7 @@
 String name_remote = "BR-M5";
 CanonBLERemote canon_ble(name_remote);
 Display M5_display(&M5.Lcd, name_remote);
+String status = "init";
 
 TimeLapse timelapse(400);
 
@@ -49,7 +50,8 @@ void setup()
     Serial.println("Setup Done");
     
     M5_display.set_address(canon_ble.getPairedAddressString());
-    M5_display.set_main_menu_screen(timelapse.get_interval(), "Ready for single shot");
+    status = "Ready for single shot";
+    M5_display.set_main_menu_screen(timelapse.get_interval(), status);
 }
 
 
@@ -83,12 +85,14 @@ void update_shooting()
             if (timelapse.Recording_OnOFF())
             {
                 Serial.println("Start timelapse");
-                M5_display.set_main_menu_screen(timelapse.get_interval(), "Shooting timelapse");
+                status = "Shooting timelapse";
+                M5_display.set_main_menu_screen(timelapse.get_interval(), status);
             }
             else
             {
                 Serial.println("Stop timelapse");
-                M5_display.set_main_menu_screen(timelapse.get_interval(), "Ready for timelapse");
+                status = "Ready for timelapse";
+                M5_display.set_main_menu_screen(timelapse.get_interval(), status);
             }
         }
     }
@@ -99,12 +103,14 @@ void update_settings()
     if (M5.BtnA.wasReleased())
     {
         timelapse.TimeLapse_decDelay();
-        M5_display.set_main_menu_screen(timelapse.get_interval(), "Setting interval");
+        status = "Setting interval";
+        M5_display.set_main_menu_screen(timelapse.get_interval(), status);
     }
     if (M5.BtnB.wasReleased())
     {
         timelapse.TimeLapse_incDelay();
-        M5_display.set_main_menu_screen(timelapse.get_interval(), "Setting interval");
+        status = "Setting interval";
+        M5_display.set_main_menu_screen(timelapse.get_interval(), status);
     }
 }
 
@@ -120,8 +126,7 @@ void loop()
         {
             // M5.BtnB.reset();
             current_mode = Shooting;
-            String status = (timelapse.get_interval()==0)?"Ready for single shot":"Ready for timelapse";
-            M5_display.set_main_menu_screen(timelapse.get_interval(), status);
+            status = (timelapse.get_interval()==0)?"Ready for single shot":"Ready for timelapse";
         }
         else
         {
@@ -134,7 +139,7 @@ void loop()
         {
             // M5.BtnB.reset();
             current_mode = Settings;
-            M5_display.set_main_menu_screen(timelapse.get_interval(), "Setting interval");
+            status = "Setting interval";
         }
         else
         {
@@ -145,5 +150,7 @@ void loop()
     default:
         break;
     }
+
+    M5_display.set_main_menu_screen(timelapse.get_interval(), status);
     delay(10);
 }
